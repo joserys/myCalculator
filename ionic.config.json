@@ -1,0 +1,7 @@
+{
+  "name": "myCalculator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

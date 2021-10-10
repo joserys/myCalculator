@@ -3,8 +3,9 @@ import './Page.css';
 import KeyPad from '../components/KeyPad';
 import Display from '../components/Display';
 
-const Page: React.FC = () => {
+var currentDisplay = 0;
 
+const Page: React.FC = () => { 
     return (
         <IonPage>
             <IonHeader class= "heightSize-10" >
@@ -18,10 +19,10 @@ const Page: React.FC = () => {
                 <IonGrid>
                     <IonRow class="ion-justify-content-center">
                         <IonCol size="11">
-                            <Display />
+                            <Display show={currentDisplay} />
                         </IonCol>
                     </IonRow>
-                    <KeyPad />            
+                    <KeyPad />
                 </IonGrid>
             </IonContent>
         </IonPage>

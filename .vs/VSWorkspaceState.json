@@ -4,8 +4,8 @@
     "\\public",
     "\\src",
     "\\src\\components",
-    "\\src\\pages",
     "\\src\\theme"
   ],
+  "SelectedNode": "\\src\\components\\Modal.tsx",
   "PreviewInSolutionExplorer": false
 }

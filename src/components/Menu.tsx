@@ -1,47 +1,49 @@
-import {
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonMenu,
-  IonMenuToggle,
-} from '@ionic/react';
+/*
+ * The main focus of the component is to create a side menu page that holds more options
+ * the current options it holds are history log, conversion tool, and settings
+ * currently only thing that works is the history log
+ */
 
-import { useLocation } from 'react-router-dom';
-import { warningOutline, warningSharp } from 'ionicons/icons';
-import './Menu.css';
+/* ionic components */
+import { IonItem, IonLabel, IonList, IonMenu, IonMenuToggle } from '@ionic/react';
 
-interface AppPage {
-  url: string;
-  iosIcon: string;
-  mdIcon: string;
-  title: string;
+/* react library */
+import { useState } from 'react';
+
+/* personal Components */
+import Modal from '../components/Modal';
+import './Menu.css'; /* ionic css template */
+
+/* grab data provided from another component */
+interface props {
+    history: string[],
+    clickedFunction: (add:string) => void
 }
 
-const appPages: AppPage[] = [
-  {
-    title: 'Spam',
-    url: '/page/Spam',
-    iosIcon: warningOutline,
-    mdIcon: warningSharp
-  }
-];
-
-const Menu: React.FC = () => {
-  const location = useLocation();
+/* creates a side menu page that holds more options for the application */
+const Menu: React.FC<props> = (props) => {
+    const [showModal, setShowModal] = useState(false);
 
     return (
         <IonMenu contentId="main" type="overlay" side="start" menuId="first">
-            <IonContent>
-                <IonList>
-                    <IonMenuToggle >
-                        <IonItem button>Settings</IonItem>
-                        <IonItem button>Calculation History</IonItem>
-                        <IonItem button>Conversions</IonItem>
-                    </IonMenuToggle>
-                </IonList>
-            </IonContent>
+            <IonMenuToggle>
+                <Modal modalName="History Log">
+                    <IonList>
+                        {props.history.map(expression => {
+                            return (
+                                <IonItem key={expression} class="ion-text-center" button onClick={() => {
+                                    props.clickedFunction(expression);
+                                    setShowModal(false)
+                                }}>
+                                    <IonLabel>{expression}</IonLabel>
+                                </IonItem>
+                            );                            
+                        })}                        
+                    </IonList>
+                </Modal>
+                <Modal modalName="Conversion Tool"></Modal>
+                <Modal modalName="Settings"></Modal>
+            </IonMenuToggle>            
         </IonMenu>
     );
 };
